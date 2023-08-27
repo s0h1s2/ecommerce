@@ -4,7 +4,7 @@ export const Footer = () => {
   const currentYear:number=new Date().getFullYear();
   return (
     <footer>
-    <Container>
+    <Container> 
         <Row>
             <Col className="text-center py-3">
                 <p>Online Shop &copy; {currentYear}</p>

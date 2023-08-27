@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaStar,FaStarHalfAlt,FaRegStar} from 'react-icons/fa'
-const Rating = ({rate}) => {
+const Rating = ({rate,numberOfReviews}) => {
   const wholeRate=Math.trunc(rate);
   return (
     <div>
@@ -11,6 +11,7 @@ const Rating = ({rate}) => {
             </span>
             );
         })}
+        <span> {numberOfReviews} reviews</span>
     </div>
   )
 }
