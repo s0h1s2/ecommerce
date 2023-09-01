@@ -8,6 +8,8 @@ import { CART, HOME, PRODUCT_DETAIL, SIGN_IN } from './constants/routeNames.tsx'
 import SigninRoute from './routes/SigninRoute.tsx'
 import CartRoute from './routes/CartRoute.tsx'
 import ProductDetail from './routes/ProductDetailRoute.tsx'
+import { Provider } from 'react-redux'
+import store from './store.ts'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={HOME} element={<App />}>
@@ -20,6 +22,8 @@ const router = createBrowserRouter(
 )
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )

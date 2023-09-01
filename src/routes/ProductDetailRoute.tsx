@@ -1,6 +1,4 @@
-import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import products from '../products';
 import { HOME } from '../constants/routeNames';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
@@ -36,7 +34,7 @@ const ProductDetail = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Status:</Col>
-                  <Col><strong>{product?.countInStock>0?'in Stock':'Out of stock'}</strong></Col>
+                  <Col><strong>{product?.countInStock> 0 ? 'in Stock' : 'Out of stock'}</strong></Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -46,20 +44,13 @@ const ProductDetail = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button className='btn-block' type="button" disabled={product?.countInStock==0}>
+                <Button className='btn-block' type="button" disabled={product?.countInStock == 0}>
                   Add To Product
                 </Button>
               </ListGroup.Item>
-
-
-
             </ListGroup>
           </Card>
-
         </Col>
-
-
-
       </Row>
     </>
   )
