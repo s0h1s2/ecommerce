@@ -1,12 +1,21 @@
 import { Link, useParams } from 'react-router-dom'
 import { HOME } from '../constants/routeNames';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { useGetProductByIdQuery } from '../slices/ProductSlice';
 import Spinner from '../components/Spinner';
+import { useState } from 'react';
+import { addToCart } from '../slices/CartSlice';
+import { useDispatch } from 'react-redux';
 const ProductDetail = () => {
   const { id } = useParams();
   const { data: product, isLoading } = useGetProductByIdQuery(parseInt(id!));
+  const [qty, setQty] = useState(0);
+  const dispatch = useDispatch();
+  function addToCartHandler(): void {
+    dispatch(addToCart({ ...product, qty }));
+  }
+
   return (
     isLoading ? <Spinner /> :
       <>
@@ -21,7 +30,7 @@ const ProductDetail = () => {
                 <h3>{product?.name}</h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Rating rate={product?.rating} numberOfReviews={product?.numberOfReviews} />
+                <Rating rate={product?.rating!} numberOfReviews={product?.numberOfReviews!} />
               </ListGroup.Item>
               <ListGroup.Item>
                 Price:${product?.price}
@@ -45,11 +54,25 @@ const ProductDetail = () => {
                     <Col>Price:</Col>
                     <Col><strong>${product?.price}</strong></Col>
                   </Row>
-
                 </ListGroup.Item>
+                {product?.stock! > 0 &&
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Qty:</Col>
+                      <Col>
+                        <Form.Control as="select" value={qty} onChange={(e) => setQty(Number(e.target.value))}>
+                          {[...Array(product?.stock).keys()].map((x) => {
+                            x = x + 1
+                            return <option key={x} value={x}>{x}</option>
+                          })}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                }
                 <ListGroup.Item>
-                  <Button className='btn-block' type="button" disabled={product?.stock === 0 ? true : false}>
-                    Add To Product
+                  <Button className='btn-block' type="button" disabled={product?.stock === 0 ? true : false} onClick={addToCartHandler}>
+                    Add To Cart
                   </Button>
                 </ListGroup.Item>
               </ListGroup>
