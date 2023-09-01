@@ -16,8 +16,6 @@ export const productSlice=apiSlice.injectEndpoints({
             }),
             keepUnusedDataFor:5,
         })
-
-
     })
 })
 

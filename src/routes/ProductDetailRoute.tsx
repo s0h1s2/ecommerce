@@ -6,16 +6,15 @@ import { useGetProductByIdQuery } from '../slices/ProductSlice';
 import Spinner from '../components/Spinner';
 import { useState } from 'react';
 import { addToCart } from '../slices/CartSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../hooks';
 const ProductDetail = () => {
   const { id } = useParams();
   const { data: product, isLoading } = useGetProductByIdQuery(parseInt(id!));
-  const [qty, setQty] = useState(0);
-  const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
+  const dispatch = useAppDispatch();
   function addToCartHandler(): void {
-    dispatch(addToCart({ ...product, qty }));
+    dispatch(addToCart({ ...product!, qty: qty }));
   }
-
   return (
     isLoading ? <Spinner /> :
       <>
