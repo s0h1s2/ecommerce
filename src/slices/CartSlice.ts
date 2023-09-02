@@ -9,16 +9,19 @@ const cartSlice = createSlice({
         addToCart: (state, action: PayloadAction<Product>) => {
             const item = action.payload;
             const existItem = state.cartItems.find((product) => item.ID == product.ID);
-            console.log(existItem)
             if (existItem) {
                 state.cartItems = state.cartItems.map((x) => x.ID == existItem.ID ? item : x);
             } else {
                 state.cartItems = [...state.cartItems, item]
             }
-            console.log(item.qty)
             state.totalPrice = state.cartItems.reduce((acc, product) => (product.price * product.qty) + acc, 0)
-        }
+        },
+        removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
+            state.cartItems = state.cartItems.filter((product) => action.payload.id != product.ID);
+        },
+
+
     }
 })
-export const { addToCart } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
 export default cartSlice.reducer
