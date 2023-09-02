@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import "bootstrap/dist/css/bootstrap.min.css"
+//import "bootstrap/dist/css/bootstrap.min.css"
+import "../assets/bootstrap.min.css"
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import HomeRoute from './routes/HomeRoute.tsx'
 import { CART, HOME, PRODUCT_DETAIL, SIGN_IN } from './constants/routeNames.tsx'

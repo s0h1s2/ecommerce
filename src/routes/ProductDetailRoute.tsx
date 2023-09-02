@@ -23,7 +23,7 @@ const ProductDetail = () => {
           <Col md={5}>
             <Image src={product?.image} alt={product?.name} fluid />
           </Col>
-          <Col md={4}>
+          <Col md={4} >
             <ListGroup>
               <ListGroup.Item>
                 <h3>{product?.name}</h3>
@@ -65,6 +65,7 @@ const ProductDetail = () => {
                             return <option key={x} value={x}>{x}</option>
                           })}
                         </Form.Control>
+
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -81,5 +82,4 @@ const ProductDetail = () => {
       </>
   )
 }
-
 export default ProductDetail

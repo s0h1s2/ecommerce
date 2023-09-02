@@ -1,6 +1,6 @@
 import { Product } from "./ProductType"
 type Cart = {
-    cardItems: Product[],
+    cartItems: Product[],
     totalPrice: number
 }
 export default Cart
