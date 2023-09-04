@@ -1,10 +1,11 @@
-import { Navbar, Nav, Container, Badge } from "react-bootstrap";
+import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap"
-import { SIGN_IN, CART, HOME } from "../constants/routeNames";
+import { SIGN_IN, CART, HOME, PROFILE } from "../constants/routeNames";
 import { useAppSelector } from "../hooks";
 const Header = () => {
     const { cartItems } = useAppSelector(state => state.cart)
+    const { userInfo } = useAppSelector(state => state.auth)
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -18,15 +19,26 @@ const Header = () => {
                             <LinkContainer to={CART}>
                                 <Nav.Link><FaShoppingCart /> Cart<Badge pill style={{ marginLeft: "5px" }}>{cartItems.reduce((acc, p) => p.qty + acc, 0)}</Badge> </Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to={SIGN_IN}>
-                                <Nav.Link><FaUser />Sign in</Nav.Link>
+                            {userInfo ? (
+                                <NavDropdown drop="down-centered" title={userInfo.name} id="username">
+                            <LinkContainer to={PROFILE}>
+                                <NavDropdown.Item>Profile</NavDropdown.Item>
                             </LinkContainer>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
+                            <NavDropdown.Item onClick={() => console.log("logout")}>Logout</NavDropdown.Item>
+                        </NavDropdown>
 
-            </Navbar>
-        </header>
+                        ) : (
+                        <LinkContainer to={SIGN_IN}>
+                            <Nav.Link><FaUser />Sign in</Nav.Link>
+                        </LinkContainer>
+
+                            )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+
+        </Navbar>
+        </header >
     );
 }
 export default Header;
