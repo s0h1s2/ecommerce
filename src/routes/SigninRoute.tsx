@@ -1,26 +1,25 @@
 import { FormEvent, useState } from 'react'
 import FormContainer from '../components/FormContainer'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Spinner } from 'react-bootstrap'
 import { HOME } from '../constants/routeNames'
-import { Link } from 'react-router-dom'
-import Spinner from '../components/Spinner'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../slices/userSlice'
 import { setCredentials } from '../slices/authSlice'
 import { useAppDispatch } from '../hooks'
-
 const SigninRoute = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors, setErrors] = useState({})
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
-
+  
   async function submitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
       const res = await login({ email, password }).unwrap()
-      console.log(res)
-
+      dispatch(setCredentials({ ...res }))
+      navigate(HOME)
     } catch (err) {
       if (err.status == 400) {
         setErrors(err.data.error)
@@ -47,8 +46,8 @@ const SigninRoute = () => {
 
         </Form.Group>
         <div className='d-grid gap-2'>
-          <Button type="submit" variant="primary" className="mt-2">
-           Login 
+          <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
+            {isLoading ? <Spinner size='sm' /> : "Login"}
           </Button>
         </div>
       </Form>
