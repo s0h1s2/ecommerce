@@ -8,16 +8,16 @@ const cartSlice = createSlice({
     reducers: {
         addToCart: (state, action: PayloadAction<Product>) => {
             const item = action.payload;
-            const existItem = state.cartItems.find((product) => item.ID == product.ID);
+            const existItem = state.cartItems.find((product) => item.id== product.id);
             if (existItem) {
-                state.cartItems = state.cartItems.map((x) => x.ID == existItem.ID ? item : x);
+                state.cartItems = state.cartItems.map((x) => x.id== existItem.id? item : x);
             } else {
                 state.cartItems = [...state.cartItems, item]
             }
             state.totalPrice = state.cartItems.reduce((acc, product) => (product.price * product.qty) + acc, 0)
         },
         removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
-            state.cartItems = state.cartItems.filter((product) => action.payload.id != product.ID);
+            state.cartItems = state.cartItems.filter((product) => action.payload.id != product.id);
         },
 
 

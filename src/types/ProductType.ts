@@ -1,6 +1,6 @@
 
 export interface Product {
-    ID: number,
+    id: number,
     description: string,
     image: "string",
     brand: string,
@@ -9,7 +9,7 @@ export interface Product {
     stock: number,
     name: string,
     rating: number,
-    numberOfReviews: number
+    noReviews: number
 }
 export interface Product {
     qty: number

@@ -32,7 +32,7 @@ const CartRoute = () => {
                                             <Image src={item.image} alt={item.name} fluid rounded />
                                         </Col>
                                         <Col md={3}>
-                                            <Link to={`${PRODUCT_DETAIL.replace(":id", item.ID.toString())}`}>{item.name}</Link>
+                                            <Link to={`${PRODUCT_DETAIL.replace(":id", item.id.toString())}`}>{item.name}</Link>
                                         </Col>
                                         <Col md={2}>${item.price}</Col>
                                         <Col md={2}>
@@ -45,7 +45,7 @@ const CartRoute = () => {
 
                                         </Col>
                                         <Col md={2}>
-                                            <Button type="button" variant="light" onClick={() => removeFromCartHandler(item.ID)}>
+                                            <Button type="button" variant="light" onClick={() => removeFromCartHandler(item.id)}>
                                                 <FaTrash />
                                             </Button>
                                         </Col>

@@ -29,7 +29,7 @@ const ProductDetail = () => {
                 <h3>{product?.name}</h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Rating rate={product?.rating!} numberOfReviews={product?.numberOfReviews!} />
+                <Rating rate={product?.rating!} numberOfReviews={product?.noReviews!} />
               </ListGroup.Item>
               <ListGroup.Item>
                 Price:${product?.price}

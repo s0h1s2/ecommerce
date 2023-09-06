@@ -11,8 +11,8 @@ const HomeRoute = () => {
             {isLoading ? <Spinner /> : <Row>
                 {products?.map((product: Product) => {
                     return (
-                        <Col key={product.ID} sm={12} md={6} lg={4} xl={3}>
-                            <ProductCard key={product.ID} product={product} />
+                        <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
+                            <ProductCard key={product.id} product={product} />
                         </Col>
                     );
                 })}
