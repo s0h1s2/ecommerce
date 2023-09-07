@@ -5,13 +5,14 @@ import App from './App.tsx'
 import "../assets/bootstrap.min.css"
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import HomeRoute from './routes/HomeRoute.tsx'
-import { CART, HOME, PRODUCT_DETAIL, SIGN_IN,SIGN_UP} from './constants/routeNames.tsx'
+import { CART, HOME, PRODUCT_DETAIL, SHIPPING, SIGN_IN,SIGN_UP} from './constants/routeNames.tsx'
 import SigninRoute from './routes/SigninRoute.tsx'
 import CartRoute from './routes/CartRoute.tsx'
 import ProductDetail from './routes/ProductDetailRoute.tsx'
 import { Provider } from 'react-redux'
 import store from './store.ts'
 import SignupRoute from './routes/SignupRoute.tsx'
+import ShippingRoute from './routes/ShippingRoute.tsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={HOME} element={<App />}>
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path={SIGN_IN} element={<SigninRoute />}></Route>
       <Route path={SIGN_UP} element={<SignupRoute/>}></Route>
       <Route path={CART} element={<CartRoute />}></Route>
+      <Route path={SHIPPING} element={<ShippingRoute/>}></Route>
       <Route path={PRODUCT_DETAIL} element={<ProductDetail />}></Route>
     </Route>
   )

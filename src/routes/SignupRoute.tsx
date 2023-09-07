@@ -1,10 +1,9 @@
 import { FormEvent, useState } from 'react'
 import FormContainer from '../components/FormContainer'
 import { Button, Form, Spinner } from 'react-bootstrap'
-import { HOME, SIGN_IN, SIGN_UP } from '../constants/routeNames'
+import {  SIGN_IN } from '../constants/routeNames'
 import { Link, useNavigate } from 'react-router-dom'
 import {  useRegisterMutation } from '../slices/userSlice'
-import { setCredentials } from '../slices/authSlice'
 import { useAppDispatch } from '../hooks'
 const SignupRoute= () => {
 
@@ -13,7 +12,6 @@ const SignupRoute= () => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [errors, setErrors] = useState({})
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [register, { isLoading }] = useRegisterMutation()
   
@@ -25,8 +23,7 @@ const SignupRoute= () => {
     }
     try {
       const res = await register({ name,email, password }).unwrap()
-      //dispatch(setCredentials({ ...res }))
-      //navigate(HOME)
+      navigate(SIGN_IN)
     } catch (err) {
       if (err.status == 400) {
         setErrors({...errors,...err.data.error})

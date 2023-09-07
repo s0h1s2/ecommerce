@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import Cart from "../types/CartType";
 import { Product } from "../types/ProductType";
-const initialState: Cart = { cartItems: [], totalPrice: 0 }
+const initialState: Cart = { cartItems: [], shippingAddress:null,totalPrice: 0 }
 const cartSlice = createSlice({
     name: "cart",
     initialState,
