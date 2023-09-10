@@ -8,16 +8,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Header = () => {
     const { cartItems } = useAppSelector(state => state.cart)
     const { userInfo } = useAppSelector(state => state.auth)
-    const dispatch=useAppDispatch()
-    const path=useLocation()
-    const navigate=useNavigate() 
-    function handleLogout(){
-      dispatch(logout())
-      navigate(SIGN_IN)
-    } 
+    const dispatch = useAppDispatch()
+    const path = useLocation()
+    const navigate = useNavigate()
+    function handleLogout() {
+        dispatch(logout())
+        navigate(SIGN_IN)
+    }
     return (
         <header>
-            <Navbar  bg="dark" variant="dark" expand="lg" collapseOnSelect>
+            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
                     <LinkContainer to={HOME}>
                         <Navbar.Brand>Online Shop</Navbar.Brand>
@@ -30,23 +30,23 @@ const Header = () => {
                             </LinkContainer>
                             {userInfo ? (
                                 <NavDropdown drop="down-centered" title={userInfo.name} id="username">
-                            <LinkContainer to={PROFILE}>
-                                <NavDropdown.Item>Profile</NavDropdown.Item>
-                            </LinkContainer>
-                            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                        </NavDropdown>
+                                    <LinkContainer to={PROFILE}>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                                </NavDropdown>
 
-                        ) : (
-                        <LinkContainer to={SIGN_IN}>
-                            <Nav.Link><FaUser />Sign in</Nav.Link>
-                        </LinkContainer>
+                            ) : (
+                                <LinkContainer to={SIGN_IN}>
+                                    <Nav.Link><FaUser />Sign in</Nav.Link>
+                                </LinkContainer>
 
                             )}
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
 
-        </Navbar>
+            </Navbar>
         </header >
     );
 }

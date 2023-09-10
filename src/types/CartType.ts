@@ -1,7 +1,9 @@
+import { Payment } from "./PaymentType"
 import { Product } from "./ProductType"
-type Cart = {
+interface Cart  {
     cartItems: Product[],
-    shippingAddress: Shipping|null,
+    shippingAddress: Shipping 
+    paymentMethod: Payment 
     totalPrice: number
 }
 export default Cart

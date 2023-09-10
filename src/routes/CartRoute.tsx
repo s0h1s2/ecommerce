@@ -1,10 +1,11 @@
 import { Button, Card, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { HOME, PRODUCT_DETAIL } from "../constants/routeNames";
+import { HOME, PRODUCT_DETAIL, SHIPPING } from "../constants/routeNames";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { Product } from "../types/ProductType";
 import { addToCart, removeFromCart } from "../slices/CartSlice";
+import { LinkContainer } from "react-router-bootstrap";
 
 const CartRoute = () => {
     const { cartItems } = useAppSelector(state => state.cart)
@@ -26,7 +27,7 @@ const CartRoute = () => {
                     <ListGroup variant="flush">
                         {cartItems.map((item) => {
                             return (
-                                <ListGroup.Item key={item.ID}>
+                                <ListGroup.Item key={item.id}>
                                     <Row>
                                         <Col md={2}>
                                             <Image src={item.image} alt={item.name} fluid rounded />
@@ -69,7 +70,8 @@ const CartRoute = () => {
                             <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button disabled={cartItems.length == 0 ? true : false}>Checkout</Button>
+                            <LinkContainer to={SHIPPING}>
+                                <Button disabled={cartItems.length == 0 ? true : false}>Checkout</Button></LinkContainer>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
