@@ -1,26 +1,24 @@
-import { Col, ListGroup, Row, Image, Card, Button, Spinner, ToastContainer } from 'react-bootstrap'
-import { useAppSelector } from '../hooks'
+import { Button, Card, Col, Image, ListGroup, Row, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { PRODUCT_DETAIL } from '../constants/routeNames'
-import { useCreateOrderMutation } from '../slices/OrderApiSlice'
 import { toast } from 'react-toastify'
+import { PRODUCT_DETAIL } from '../constants/routeNames'
+import { useAppSelector } from '../hooks'
+import { useCreateOrderMutation } from '../slices/OrderApiSlice'
 
 const OrderProduct = () => {
-  const [createOrder, { isLoading, isError, error }] = useCreateOrderMutation()
-  const { shippingAddress, paymentMethod, cartItems, totalPrice } = useAppSelector((state) => state.cart)
+  const [createOrder, { isLoading }] = useCreateOrderMutation()
+  const { shippingAddress, cartItems, totalPrice } = useAppSelector((state) => state.cart)
 
   async function placeOrderHandler() {
     const orderItems = cartItems.map((item) => ({ qty: item.qty, productId: item.id }))
-    const res = await createOrder({
+    await createOrder({
       orderItems: orderItems,
       ...shippingAddress
     }).unwrap().catch((e) => {
-
       toast.error(e.data)
     })
     toast.success("Order was successful")
-    if (isError) {
-    }
+    
   }
 
   return (

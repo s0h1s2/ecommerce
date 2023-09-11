@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FormEvent, useState } from 'react'
 import FormContainer from '../components/FormContainer'
 import { Button, Form, Spinner } from 'react-bootstrap'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaStar,FaStarHalfAlt,FaRegStar} from 'react-icons/fa'
 const Rating = ({rate,numberOfReviews}:{rate:number,numberOfReviews:number}) => {
   const wholeRate=Math.trunc(rate);

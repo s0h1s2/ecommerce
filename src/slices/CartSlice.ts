@@ -1,7 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import Cart from "../types/CartType";
 import { Product } from "../types/ProductType";
-const initialState: Cart = { cartItems: [], shippingAddress: null, paymentMethod: null, totalPrice: 0 }
+import { PaymentType } from "../types/PaymentType";
+const initialState: Cart = { cartItems: [], shippingAddress: {
+    address: "",
+    city: "",
+    country: "",
+    postalCode: ""
+}, paymentMethod: {
+    paymentType: PaymentType.Paypal
+}, totalPrice: 0 }
 const cartSlice = createSlice({
     name: "cart",
     initialState,
@@ -18,9 +26,6 @@ const cartSlice = createSlice({
         },
         setShippingInfo: (state, action: PayloadAction<Shipping>) => {
             state.shippingAddress = action.payload
-        },
-        setPaymentMethod: (state, action: PayloadAction<Payment>) => {
-
         },
         removeFromCart: (state, action: PayloadAction<{ id: number }>) => {
             state.cartItems = state.cartItems.filter((product) => action.payload.id != product.id);

@@ -1,16 +1,16 @@
+// @ts-ignore
 import { Button, Col, Form } from 'react-bootstrap'
 import FormContainer from './FormContainer'
 import { PaymentType } from '../types/PaymentType'
-import { FormEvent, useRef, useState } from 'react'
+import { FormEvent} from 'react'
 
 const PaymentMethod = ({ next }: { next: () => void }) => {
-  var paymentMethod = useRef(PaymentType.Paypal)
-  function handleSelectChange(payType: PaymentType) {
-    paymentMethod = payType
+  function handleSelectChange(type:any) {
+    console.log(type)
+    throw new Error("Not implmeneted!")
   }
   function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log(paymentMethod)
     next()
   }
 

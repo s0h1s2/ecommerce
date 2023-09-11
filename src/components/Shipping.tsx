@@ -1,6 +1,6 @@
 import FormContainer from "./FormContainer"
 import { Button, Form } from "react-bootstrap"
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { useAppDispatch } from "../hooks"
 import { setShippingInfo } from "../slices/CartSlice"
 const Shipping = ({ next }: { next: () => void }) => {
@@ -9,7 +9,7 @@ const Shipping = ({ next }: { next: () => void }) => {
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
   const dispatch = useAppDispatch();
-  function submitHandler(e) {
+  function submitHandler(e:FormEvent<HTMLFormElement>) {
     e.preventDefault()
     dispatch(setShippingInfo({ address, postalCode, city, country }))
     next()
