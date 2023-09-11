@@ -1,20 +1,26 @@
-import { Col, ListGroup, Row, Image, Card, Button, Spinner } from 'react-bootstrap'
+import { Col, ListGroup, Row, Image, Card, Button, Spinner, ToastContainer } from 'react-bootstrap'
 import { useAppSelector } from '../hooks'
 import { Link } from 'react-router-dom'
 import { PRODUCT_DETAIL } from '../constants/routeNames'
 import { useCreateOrderMutation } from '../slices/OrderApiSlice'
+import { toast } from 'react-toastify'
 
 const OrderProduct = () => {
-  const [ createOrder,{isLoading,error} ]=useCreateOrderMutation()
+  const [createOrder, { isLoading, isError, error }] = useCreateOrderMutation()
   const { shippingAddress, paymentMethod, cartItems, totalPrice } = useAppSelector((state) => state.cart)
 
-  async function placeOrderHandler(){
-    const orderItems=cartItems.map((item)=>({qty:item.qty,productId:item.id})) 
-     const res=await createOrder({
-       orderItems: orderItems,
-       ...shippingAddress     
-      }).unwrap()
-      console.log(res)
+  async function placeOrderHandler() {
+    const orderItems = cartItems.map((item) => ({ qty: item.qty, productId: item.id }))
+    const res = await createOrder({
+      orderItems: orderItems,
+      ...shippingAddress
+    }).unwrap().catch((e) => {
+
+      toast.error(e.data)
+    })
+    toast.success("Order was successful")
+    if (isError) {
+    }
   }
 
   return (
@@ -94,13 +100,14 @@ const OrderProduct = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <div className="d-grid gap-2">
-                <Button disabled={cartItems.length === 0} onClick={placeOrderHandler} >{isLoading?<Spinner size="sm"/>:"Order"}</Button>
+                <Button disabled={cartItems.length === 0} onClick={placeOrderHandler} >{isLoading ? <Spinner size="sm" /> : "Order"}</Button>
               </div>
             </ListGroup.Item>
           </ListGroup>
         </Card>
       </Col>
     </Row >
+
   )
 }
 
