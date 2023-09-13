@@ -1,26 +1,29 @@
 import { Button, Card, Col, Image, ListGroup, Row, Spinner } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { PRODUCT_DETAIL } from '../constants/routeNames'
-import { useAppSelector } from '../hooks'
+import { ORDER_DETAIL, PRODUCT_DETAIL } from '../constants/routeNames'
+import { useAppDispatch, useAppSelector } from '../hooks'
 import { useCreateOrderMutation } from '../slices/OrderApiSlice'
+import { clearCart } from '../slices/CartSlice'
 
 const OrderProduct = () => {
   const [createOrder, { isLoading }] = useCreateOrderMutation()
   const { shippingAddress, cartItems, totalPrice } = useAppSelector((state) => state.cart)
-
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   async function placeOrderHandler() {
     const orderItems = cartItems.map((item) => ({ qty: item.qty, productId: item.id }))
     await createOrder({
       orderItems: orderItems,
       ...shippingAddress
-    }).unwrap().catch((e) => {
+    }).unwrap().then((r) => {
+      toast.success("Order was successful")
+      dispatch(clearCart())
+      navigate(`${ORDER_DETAIL.replace(":id", r.order.id)}`)
+    }).catch((e) => {
       toast.error(e.data)
     })
-    toast.success("Order was successful")
-    
   }
-
   return (
     <Row>
       <Col md={8}>
@@ -110,3 +113,4 @@ const OrderProduct = () => {
 }
 
 export default OrderProduct
+

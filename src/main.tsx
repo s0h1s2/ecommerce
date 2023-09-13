@@ -14,6 +14,7 @@ import HomeRoute from "./routes/HomeRoute.tsx";
 import {
   CART,
   HOME,
+  ORDER_DETAIL,
   PRODUCT_DETAIL,
   SHIPPING,
   SIGN_IN,
@@ -27,6 +28,7 @@ import store from "./store.ts";
 import SignupRoute from "./routes/SignupRoute.tsx";
 import ShippingRoute from "./routes/ShippingRoute.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
+import OrderDetailRoute from "./routes/OrderDetailRoute.tsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path={HOME} element={<App />}>
@@ -37,6 +39,7 @@ const router = createBrowserRouter(
       <Route path={PRODUCT_DETAIL} element={<ProductDetail />}></Route>
       <Route path="" element={<PrivateRoute />}>
         <Route path={SHIPPING} element={<ShippingRoute />}></Route>
+        <Route path={ORDER_DETAIL} element={<OrderDetailRoute />}></Route>
       </Route>
     </Route>
   ),
