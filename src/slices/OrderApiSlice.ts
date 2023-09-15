@@ -1,6 +1,7 @@
 import { apiSlice } from "./ApiSlice";
 import { API_ORDER_BASE } from "../constants/config"
 import { Order } from "../types/OrderType";
+import { OrderResult } from "../types/OrderResultType";
 
 export const orderApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +12,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         body: order
       })
     }),
-    getOrderById: builder.query({
+    getOrderById: builder.query<{ order: OrderResult }, any>({
       query: (orderId: number) => ({
         url: `${API_ORDER_BASE}/${orderId}`,
       }),

@@ -1,5 +1,5 @@
 import { Button, Card, Col, Image, ListGroup, Row, Spinner } from 'react-bootstrap'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { ORDER_DETAIL, PRODUCT_DETAIL } from '../constants/routeNames'
 import { useAppDispatch, useAppSelector } from '../hooks'
