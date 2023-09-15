@@ -1,5 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
-import { HOME } from '../constants/routeNames';
+import { useNavigate, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { useGetProductByIdQuery } from '../slices/ProductSlice';
@@ -12,13 +11,14 @@ const ProductDetail = () => {
   const { data: product, isLoading } = useGetProductByIdQuery(parseInt(id!));
   const [qty, setQty] = useState(1);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   function addToCartHandler(): void {
     dispatch(addToCart({ ...product!, qty: qty }));
   }
   return (
     isLoading ? <Spinner /> :
       <>
-        <Link className='btn btn-light my-3' to={HOME}>Go Back</Link>
+        <button className='btn btn-light my-3' onClick={() => navigate(-1)}>Go Back</button>
         <Row>
           <Col md={5}>
             <Image src={product?.image} alt={product?.name} fluid />

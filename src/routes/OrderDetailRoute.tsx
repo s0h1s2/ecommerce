@@ -16,7 +16,9 @@ const OrderDetailRoute = () => {
     <Spinner />
   ) : (
     <>
-      <h1 className="text-muted">Order {order?.id}</h1>
+      <Row>
+        <Col><h1 className="text-muted">Order {order?.id}</h1></Col>
+      </Row>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
