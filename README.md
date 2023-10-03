@@ -1,7 +1,10 @@
 # Ecommerce Frontend project 
-Online ecommerece shop.
 
-# Images
+Online ecommerece shop built with react.js and node.js.
+
+See [demo](https://master--subtle-jelly-5c6ee7.netlify.app/) here.
+
+## Images
 ### Home
 ![image](https://github.com/s0h1s2/ecommerce-frontend/assets/30297108/0bb38c7d-3c69-4f50-a59f-b98edcd29505)
 ### Cart
